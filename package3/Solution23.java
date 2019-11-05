@@ -10,7 +10,6 @@ Output: 1->1->2->3->4->4->5->6
 */
 
 
-
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -19,19 +18,14 @@ Output: 1->1->2->3->4->4->5->6
  *     ListNode(int x) { val = x; }
  * }
  */
-class Solution23 {
+class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
         if (lists==null||lists.length==0) return null;
         
         PriorityQueue<ListNode> pq = new PriorityQueue<>(lists.length, new Comparator<ListNode>(){
             
             public int compare(ListNode n1, ListNode n2){
-                if(n1.val<n2.val)
-                    return -1;
-                else if(n1.val>n2.val)
-                    return 1;
-                else
-                    return 0;
+                return n1.val - n2.val;
             }
         });
         
@@ -53,5 +47,4 @@ class Solution23 {
         }
         
         return res.next;
-    }
-}
+   

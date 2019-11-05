@@ -15,34 +15,40 @@ Output: 1->1->2->3->4->4
  *     ListNode(int x) { val = x; }
  * }
  */
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
 class Solution {
     public ListNode mergeTwoLists(ListNode h1, ListNode h2) {
         
-        if(h1 == null || h2 ==null)
+        if(h1==null || h2==null)
             return h1==null?h2:h1;
-
-        ListNode res = new ListNode(Integer.MIN_VALUE);  
+        
+        ListNode res = new ListNode(-1);
         ListNode head = res;
         
-        while(h1!=null || h2 != null){
-            if(h1!=null && h2!=null){
-                if(h1.val<=h2.val){
-                    res.next = h1;
-                    h1 = h1.next;
-                }else{
-                    res.next = h2;
-                    h2 = h2.next;
-                }
-            }else if(h1!=null){
+        while(h1!=null && h2!=null){
+            if(h1.val<=h2.val){
                 res.next = h1;
-                break;
+                h1 = h1.next;
             }else{
                 res.next = h2;
-                break;
+                h2 = h2.next;
             }
             res = res.next;
         }
-       
+        
+        if(h1!=null){
+            res.next = h1;
+        }else{
+            res.next = h2;
+        }
+        
         return head.next;
         
     }
